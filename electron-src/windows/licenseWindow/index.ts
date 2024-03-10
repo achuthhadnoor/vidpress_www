@@ -1,5 +1,5 @@
-import { BrowserWindow } from "electron";
-import windowManager from "./windowManager";
+import { BrowserWindow, app } from "electron";
+import windowManager from "../windowManager";
 import { is } from "electron-util";
 import { format } from "url";
 import { join } from "path";
@@ -21,7 +21,7 @@ const openWindow = (dropFiles?: string[]) => {
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: true,
-      preload: join(__dirname, "../preload.js"),
+      preload: join(__dirname, "./preload.js"),
     },
   });
   const url = is.development
@@ -37,9 +37,10 @@ const openWindow = (dropFiles?: string[]) => {
     console.log("====================================");
     console.log("ready", files);
     console.log("====================================");
+    app.dock && app.dock.show();
   });
 };
 
-windowManager.setMainWindow({
+windowManager.setLicenseWindow({
   open: openWindow,
 });

@@ -1,1 +1,2 @@
 import "./mainWindow";
+import "./licenseWindow";

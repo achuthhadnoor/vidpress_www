@@ -1,10 +1,17 @@
 interface MainWindowManager {
   open: (files?: string[]) => void;
 }
+interface LicenseWindowManager {
+  open: (files?: string[]) => void;
+}
 class WindowManger {
   main?: MainWindowManager;
+  license?: LicenseWindowManager;
   setMainWindow = (mainWindowManager: MainWindowManager) => {
     this.main = mainWindowManager;
+  };
+  setLicenseWindow = (licenseWindowManager: LicenseWindowManager) => {
+    this.license = licenseWindowManager;
   };
 }
 

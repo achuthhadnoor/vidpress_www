@@ -7,10 +7,11 @@ import { IpcRendererEvent } from "electron/main";
 // Please note that many Node APIs grant access to local system resources.
 // Be very cautious about which globals and APIs you expose to untrusted remote content.
 contextBridge.exposeInMainWorld("electron", {
-  sayHello: () => ipcRenderer.send("message", "hi from next"),
-  receiveHello: (handler: (event: IpcRendererEvent, ...args: any[]) => void) =>
-    ipcRenderer.on("message", handler),
+  compressVideo: (options: any) => ipcRenderer.send("compress-video", options),
+  receiveFiles: (handler: (event: IpcRendererEvent, ...args: any[]) => void) =>
+    ipcRenderer.on("files", handler),
   stopReceivingFiles: (
     handler: (event: IpcRendererEvent, ...args: any[]) => void
-  ) => ipcRenderer.removeListener("message", handler),
+  ) => ipcRenderer.removeListener("files", handler),
+  updateOptions: (options: any) => ipcRenderer.send("update-options", options),
 });

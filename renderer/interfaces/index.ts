@@ -10,8 +10,8 @@ declare global {
   interface Window {
     electron: {
       sayHello: () => void;
-      receiveHello: (handler: (event, args) => void) => void;
-      stopReceivingHello: (handler: (event, args) => void) => void;
+      receiveFiles: (handler: (event, args) => void) => void;
+      stopReceivingFiles: (handler: (event, args) => void) => void;
     };
   }
 }
