@@ -21,10 +21,12 @@ const openWindow = (dropFiles?: string[]) => {
       titleBarStyle: "hiddenInset",
       vibrancy: "sidebar",
       skipTaskbar: true,
+      show: false,
       webPreferences: {
         nodeIntegration: true,
         allowRunningInsecureContent: true,
         preload: join(__dirname, "./preload.js"),
+        devTools: true,
       },
     });
     const url = is.development
@@ -35,7 +37,7 @@ const openWindow = (dropFiles?: string[]) => {
           slashes: true,
         });
     mainWindow.loadURL(url);
-    mainWindow.webContents.openDevTools({ mode: "detach" });
+    // mainWindow.webContents.openDevTools();
     mainWindow.addListener("ready-to-show", () => {
       console.log("====================================");
       console.log("ready", files);
@@ -44,9 +46,12 @@ const openWindow = (dropFiles?: string[]) => {
     });
   } else {
     mainWindow.show();
+    mainWindow.webContents.openDevTools();
   }
 };
-
+const hideWindow = () => {
+  mainWindow?.hide();
+};
 ipcMain.on("message", (event) => {
   console.log("====================================");
   console.log("hello from main");
@@ -56,4 +61,5 @@ ipcMain.on("message", (event) => {
 
 windowManager.setMainWindow({
   open: openWindow,
+  hideWindow: hideWindow,
 });

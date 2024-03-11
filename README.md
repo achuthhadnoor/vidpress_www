@@ -14,4 +14,7 @@ Appsumo
 technical requirements
 
 - A database to map license to users to validate them
-- 
+[x] check for updates and then update it
+[x] when initialised we prepare the tray and window
+[x] the try has a drop thing which takes the files and send to the UI to show 
+[x] the window is opened when the user drops files or click on menubar toggle option to hide and show

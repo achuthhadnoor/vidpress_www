@@ -1,5 +1,6 @@
 interface MainWindowManager {
   open: (files?: string[]) => void;
+  hideWindow: () => void;
 }
 interface LicenseWindowManager {
   open: (files?: string[]) => void;
