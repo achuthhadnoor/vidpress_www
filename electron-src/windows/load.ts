@@ -1,2 +1,0 @@
-import "./mainWindow";
-import "./licenseWindow";

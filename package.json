@@ -1,125 +1,45 @@
 {
-  "name": "vidpress",
-  "version": "0.0.1",
+  "name": "my-app",
   "private": true,
-  "main": "main/index.js",
-  "productName": "Vidpress",
-  "description": "Compress your videos upto 90% offline without compromising the quality",
-  "author": "Achuth Hadnoor <hey@achuth.dev> (https://achuth.dev)",
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "next build renderer && next start renderer",
-    "clean": "rimraf dist main renderer/out renderer/.next",
-    "dev": "npm run build-electron && electron .",
-    "build-renderer": "next build renderer",
-    "build-electron": "tsc -p electron-src",
-    "build": "npm run build-renderer && npm run build-electron",
-    "pack-app": "npm run build && electron-builder --dir",
-    "dist": "npm run build && electron-builder",
-    "type-check": "tsc -p ./renderer/tsconfig.json && tsc -p ./electron-src/tsconfig.json"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
   },
   "dependencies": {
-    "@ffmpeg-installer/ffmpeg": "^1.1.0",
-    "auto-launch": "^5.0.5",
-    "electron-log": "^5.0.1",
-    "electron-next": "^3.1.5",
-    "electron-store": "^8.1.0",
-    "electron-util": "^0.17.2",
-    "fluent-ffmpeg": "^2.1.2",
+    "@ffmpeg/ffmpeg": "^0.12.10",
+    "@ffmpeg/util": "^0.12.1",
+    "@radix-ui/react-accordion": "^1.1.2",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-popover": "^1.0.7",
+    "@radix-ui/react-progress": "^1.0.3",
+    "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-slider": "^1.1.2",
+    "@radix-ui/react-switch": "^1.0.3",
+    "@tauri-apps/api": "^1",
+    "clsx": "^2.1.0",
+    "cmdk": "^1.0.0",
+    "framer-motion": "^11.0.8",
+    "lucide-react": "^0.356.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "temp": "^0.9.4"
+    "react-dropzone": "^14.2.3",
+    "sonner": "^1.4.3",
+    "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
-    "@types/auto-launch": "^5.0.2",
-    "@types/fluent-ffmpeg": "^2.1.21",
-    "@types/node": "^14.14.6",
-    "@types/react": "^16.9.9",
-    "@types/react-dom": "^16.9.9",
-    "@types/temp": "^0.9.1",
-    "autoprefixer": "^10.4.13",
-    "electron": "^28.1.0",
-    "electron-builder": "^23.0.3",
-    "electron-builder-notarize": "^1.5.1",
-    "next": "^14.0.4",
-    "postcss": "^8.4.21",
-    "rimraf": "^3.0.0",
-    "tailwindcss": "^3.2.4",
-    "typescript": "^4.5.2"
-  },
-  "build": {
-    "appId": "com.achuth.vidpress",
-    "productName": "Vidpress",
-    "directories": {
-      "output": "dist"
-    },
-    "files": [
-      "main",
-      "assets",
-      "build",
-      "renderer/out"
-    ],
-    "mac": {
-      "category": "public.app-category.productivity",
-      "minimumSystemVersion": "10.12.0",
-      "target": {
-        "target": "default",
-        "arch": [
-          "universal",
-          "x64",
-          "arm64"
-        ]
-      },
-      "icon": "build/icons/icon.icns",
-      "hardenedRuntime": true,
-      "entitlements": "build/entitlements.mac.plist",
-      "entitlementsInherit": "build/entitlements.mac.plist",
-      "gatekeeperAssess": false,
-      "type": "distribution"
-    },
-    "win": {
-      "target": [
-        "nsis",
-        "zip"
-      ],
-      "icon": "build/icons/vidpress.ico"
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb",
-        "rpm",
-        "tar.gz"
-      ]
-    },
-    "dmg": {
-      "artifactName": "${productName}-${version}-${arch}.${ext}",
-      "iconSize": 160,
-      "contents": [
-        {
-          "x": 120,
-          "y": 230
-        },
-        {
-          "x": 390,
-          "y": 230,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ],
-      "window": {
-        "x": 200,
-        "y": 200,
-        "height": 450,
-        "width": 544
-      }
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
-      "artifactName": "${productName}-${version}-${arch}.${ext}"
-    },
-    "afterSign": "electron-builder-notarize"
+    "@tauri-apps/cli": "^1",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.0.2",
+    "vite": "^5.0.0"
   }
 }
