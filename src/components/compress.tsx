@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { acceptedVideoFiles } from "../utils/formats";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL } from "@ffmpeg/util";
@@ -17,7 +17,7 @@ import {
   VideoFormats,
   VideoInputSettings,
 } from "../types";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const CompressVideo = () => {
   const [videoFile, setVideoFile] = useState<FileActions>();
@@ -53,6 +53,11 @@ const CompressVideo = () => {
 
     return () => clearInterval(timer);
   }, [time]);
+  useEffect(() => {
+    console.log('====================================');
+    console.log(status);
+    console.log('====================================');
+  }, [status])
 
   const handleUpload = (file: File) => {
     setVideoFile({
@@ -71,6 +76,7 @@ const CompressVideo = () => {
       setTime({ ...time, startTime: new Date() });
       setStatus("compressing");
       ffmpegRef.current.on("progress", ({ progress: completion }) => {
+        debugger
         const percentage = completion * 100;
         setProgress(percentage);
       });
@@ -128,90 +134,82 @@ const CompressVideo = () => {
   useEffect(() => loadWithToast(), []);
 
   return (
-    <>
-      <motion.div
-        layout
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.8, opacity: 0 }}
-        key="drag"
-        transition={{ type: "tween" }}
-        className="flex col-span-5 md:h-full w-full flex-1"
-      >
-        {videoFile ? (
-          <VideoDisplay videoUrl={URL.createObjectURL(videoFile.file)} />
-        ) : (
-          <CustomDropZone
-            acceptedFiles={acceptedVideoFiles}
-            handleUpload={handleUpload}
-          />
-        )}
-      </motion.div>
-      <AnimatePresence mode="popLayout">
-        <motion.div
-          layout
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
-          key="size"
-          transition={{ type: "tween" }}
-          className="flex-1 flex  rounded-3xl col-span-3 h-full w-full  p-4 relative"
+    <div className="flex flex-col md:flex-row h-screen">
+      {videoFile ? (<>
+        <div
+          className="flex flex-col gap-4 justify-between flex-2 col-span-5 md:h-full w-full"
         >
-          <div className="flex flex-col gap-4 w-full justify-between">
-            {videoFile && (
-              <>
-                <VideoInputDetails
-                  onClear={() => window.location.reload()}
-                  videoFile={videoFile}
-                />
-                <VideoTrim
-                  disable={disableDuringCompression}
-                  onVideoSettingsChange={setVideoSettings}
-                  videoSettings={videoSettings}
-                />
-              </>
-            )}
-            <VideoInputControl
+          <VideoDisplay videoUrl={URL.createObjectURL(videoFile.file)} />
+          {videoFile && (
+            <VideoTrim
               disable={disableDuringCompression}
               onVideoSettingsChange={setVideoSettings}
               videoSettings={videoSettings}
             />
-            <motion.div
-              layout
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              key="button"
-              transition={{ type: "tween" }}
-              className="rounded-2xl p-3 h-fit"
-            >
-              {status === "compressing" && (
-                <VideoCompressProgress
-                  progress={progress}
-                  seconds={time.elapsedSeconds}
+          )}
+        </div>
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            layout
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            key="size"
+            transition={{ type: "tween" }}
+            className=" flex rounded-3xl h-full relative w-1/2"
+          >
+            <div className="flex flex-1 flex-col gap-2 w-full h-screen overflow-auto pr-4">
+              {videoFile && (
+                <>
+                  <VideoInputDetails
+                    onClear={() => window.location.reload()}
+                    videoFile={videoFile}
+                  />
+                </>
+              )}
+              <VideoInputControl
+                disable={disableDuringCompression}
+                onVideoSettingsChange={setVideoSettings}
+                videoSettings={videoSettings}
+              />
+              <div
+                className="rounded-2xl p-3 h-fit"
+              >
+                {status === "compressing" && (
+                  <VideoCompressProgress
+                    progress={progress}
+                    seconds={time.elapsedSeconds}
+                  />
+                )}
+
+                {(status === "notStarted" || status === "converted") && (
+                  <button
+                    onClick={compress}
+                    type="button"
+                    className=" bg-indigo-700 rounded-lg text-white/90 px-3.5 py-2.5 relative text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-500 focus:ring-zinc-950 w-full plausible-event-name=Compressed"
+                  >
+                    Compress
+                  </button>
+                )}
+              </div>
+              {status !== "converted" && videoFile && (
+                <VideoOutputDetails
+                  timeTaken={time.elapsedSeconds}
+                  videoFile={videoFile}
                 />
               )}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </>
+      ) : (
+        <CustomDropZone
+          acceptedFiles={acceptedVideoFiles}
+          handleUpload={handleUpload}
+        />
+      )}
 
-              {(status === "notStarted" || status === "converted") && (
-                <button
-                  onClick={compress}
-                  type="button"
-                  className="bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-zinc-700 via-zinc-950 to-zinc-950 rounded-lg text-white/90 px-3.5 py-2.5 relative text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-500 focus:ring-zinc-950 w-full plausible-event-name=Compressed"
-                >
-                  Compress
-                </button>
-              )}
-            </motion.div>
-            {status === "converted" && videoFile && (
-              <VideoOutputDetails
-                timeTaken={time.elapsedSeconds}
-                videoFile={videoFile}
-              />
-            )}
-          </div>
-        </motion.div>
-      </AnimatePresence>
-    </>
+    </div>
   );
 };
 

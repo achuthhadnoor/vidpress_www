@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { VideoSlider } from "../../components/ui/videoSlider";
 import { VideoInputSettings } from "../../types";
 import { calculateTimeInHoursMinutesSeconds } from "../../utils/timeConverter";
+// @ts-ignore
 import { motion } from "framer-motion";
 type VideoTrimProps = {
   videoSettings: VideoInputSettings;
@@ -47,13 +48,13 @@ export const VideoTrim = ({
       exit={{ scale: 0.8, opacity: 0 }}
       key="trim"
       transition={{ type: "tween" }}
-      className="bg-gray-100 border border-gray-200 rounded-2xl px-4 py-3 h-fit"
+      className="px-4"
     >
       <div className=" text-sm">
-        <div className="flex justify-between items-center border-b mb-2 pb-2">
-          <p className="">Trim Video</p>
-        </div>
-        <div className="flex justify-between items-center border-b mb-2 pb-2">
+        {/* <div className="flex justify-between items-center mb-2 pb-2">
+          <p className="font-semibold">Trim Video</p>
+        </div> */}
+        <div className="flex justify-between items-center border border-neutral-600 mb-2 rounded-md">
           <VideoSlider
             disabled={disable}
             value={[customStartTime, customEndTime]}
@@ -70,14 +71,14 @@ export const VideoTrim = ({
             }}
           />
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between pb-4">
           <div>
-            <p className="text-gray-500">Start Time</p>
-            <p className="font-medium">{startTime}</p>
+            {/* <p className="text-gray-500">Start Time</p> */}
+            <p className="font-medium text-neutral-500">{startTime}</p>
           </div>
           <div>
-            <p className="text-gray-500">End Time</p>
-            <p className="text-end font-medium">{endTime}</p>
+            {/* <p className="text-gray-500">End Time</p> */}
+            <p className="text-end font-medium text-neutral-500">{endTime}</p>
           </div>
         </div>
       </div>

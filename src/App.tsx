@@ -5,8 +5,8 @@ import { appWindow } from '@tauri-apps/api/window'
 function App() {
 
   return (
-    <div className="h-screen flex flex-col md:flex-row">
-      <div data-tauri-drag-region className="sticky top-0 bg-white/40 w-full p-2 flex">
+    <div className="h-screen ">
+      {/* <div data-tauri-drag-region className="absolute top-0 bg-white/40 w-full p-2 flex">
         <div className="titlebar-button" id="titlebar-minimize" onClick={() => {
           appWindow.minimize()
         }}>
@@ -26,7 +26,7 @@ function App() {
         }}>
           <img src="https://api.iconify.design/mdi:close.svg" alt="close" />
         </div>
-      </div>
+      </div> */}
       <CompressVideo />
     </div>
   );

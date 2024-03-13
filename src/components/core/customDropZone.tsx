@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
+// @ts-ignore
 import ReactDropzone from "react-dropzone";
+// @ts-ignore
 import { toast } from "sonner";
 import { Projector } from "../ui/svg/projector";
 
@@ -49,21 +51,19 @@ export const CustomDropZone = ({
       multiple={false}
       onError={onError}
     >
-      {({ getRootProps, getInputProps }) => (
+      {({ getRootProps, getInputProps }: any) => (
         <div
           {...getRootProps()}
-          className={`${isHover ? "border-black bg-gray-100/80" : "border-default-gray"
+          className={`${isHover ? "border-black bg-indigo-900 text-neutral-50" : "border-default-gray"
             } flex justify-center items-center flex-col cursor-pointer w-full py-6 ${disabled ? "cursor-not-allowed" : ""
             }`}
         >
           <input {...getInputProps()} />
-          <Projector />
-          <h3 className="text-center mt-5">
-            Click to select video
-            <br />
-            or
-            <br />
-            drag video and Drop
+          <span className="p-5 bg-indigo-900/10 rounded-full">
+            <Projector />
+          </span>
+          <h3 className=" text-center mt-5 text-md">
+            <span className="font-bold">Choose a video</span> or upload a files
           </h3>
         </div>
       )}

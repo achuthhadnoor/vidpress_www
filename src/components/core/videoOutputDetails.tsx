@@ -42,36 +42,35 @@ export const VideoOutputDetails = ({
       exit={{ scale: 0.8, opacity: 0 }}
       key="output"
       transition={{ type: "tween" }}
-      className="bg-gray-100 border border-gray-200 rounded-2xl px-4 py-3 h-fit"
+      className=" rounded-2xl px-4 py-3 h-fit"
     >
       <div className="text-sm">
-        <div className="flex justify-between items-center border-b mb-2 pb-2">
+        <div className="flex justify-between items-center mb-2 pb-2">
           <div className="flex items-center gap-1">
             <p className="">Output File</p>
-            <BadgeCheck className="text-white rounded-full" fill="#000000" />
           </div>
           <button
             onClick={download}
             type="button"
-            className="bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-zinc-700 via-zinc-950 to-zinc-950 rounded-lg text-white/90 px-2.5 py-1.5 relative text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-500 focus:ring-zinc-950 "
+            className="bg-indigo-600 rounded-lg text-white/90 px-2.5 py-1.5 relative text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-500 focus:ring-zinc-950 "
           >
             Download
           </button>
         </div>
-
-        <div className="flex justify-between items-center border-b mb-2 pb-2">
+        <hr className="h-px mb-2 bg-gray-200 border-0 dark:bg-gray-700" />
+        <div className="flex justify-between items-center mb-2 pb-2">
           <p className="font-semibold">New file size</p>
           <p className="font-semibold">{outputFileSize}</p>
         </div>
-        <div className="flex justify-between items-center border-b mb-2 pb-2">
+        <div className="flex justify-between items-center mb-2 pb-2">
           <p className="font-semibold">Size Reduced %</p>
           <p className="font-semibold">{percentage}%</p>
         </div>
-        <div className="flex justify-between items-center border-b mb-2 pb-2">
+        <div className="flex justify-between items-center mb-2 pb-2">
           <p>Original file size</p>
           <p>{bytesToSize(videoFile.fileSize)}</p>
         </div>
-        <div className="flex justify-between items-center border-b mb-2 pb-2">
+        <div className="flex justify-between items-center mb-2 pb-2">
           <p>Size reduced</p>
           <p>{sizeReduced}</p>
         </div>

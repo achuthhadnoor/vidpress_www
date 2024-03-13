@@ -30,15 +30,13 @@
     },
     "windows": [
       {
-        "title": "my-app",
-        "width": 400,
-        "height": 800,
-        "maxHeight": 800,
-        "maxWidth": 900,
-        "minWidth": 400,
-        "decorations": false,
+        "title": "Vidpress",
+        "width": 900,
+        "height": 600,
+        "resizable": false,
         "alwaysOnTop": true,
-        "titleBarStyle": "Visible"
+        "titleBarStyle": "Visible",
+        "fileDropEnabled": false
       }
     ],
     "security": {
