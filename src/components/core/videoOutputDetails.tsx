@@ -1,4 +1,6 @@
 import { BadgeCheck } from "lucide-react";
+import { save } from '@tauri-apps/api/dialog';
+import { writeTextFile } from '@tauri-apps/api/fs';
 import { FileActions } from "../../types";
 import {
   bytesToSize,
@@ -16,6 +18,20 @@ export const VideoOutputDetails = ({
   videoFile,
   timeTaken,
 }: VideoOutputDetailsProps) => {
+  /**
+  import { saveAs } from 'file-saver';
+  import { save } from '@tauri-apps/api/dialog';
+  import { writeTextFile } from '@tauri-apps/api/fs';
+  // enable dialogs for this 
+  export const downloadFile = async (filename, text, type = 'application/json') => {
+      if (window.__TAURI__) {
+          const filePath = await save({ defaultPath: filename });
+          await writeTextFile(filePath, text);
+      } else {
+          saveAs(new Blob([text], { type }), filename);
+      }
+  };
+   */
   const outputFileSize = calculateBlobSize(videoFile.outputBlob);
   const { sizeReduced, percentage } = reduceSize(
     videoFile.fileSize,
@@ -24,6 +40,13 @@ export const VideoOutputDetails = ({
 
   const download = () => {
     if (!videoFile?.url) return;
+    if (window.__TAURI__) {
+      const filePath = await save({ defaultPath: filename });
+      await writeTextFile(filePath, videoFile.outputBlob);
+    } else {
+      console.log("failed as tauri is now vaialable here ")
+      // saveAs(new Blob([text], { type }), filename);
+    }
     const a = document.createElement("a");
     a.style.display = "none";
     a.href = videoFile.url;
