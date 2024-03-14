@@ -1,8 +1,6 @@
 "use client";
 import { useState } from "react";
-// @ts-ignore
 import ReactDropzone from "react-dropzone";
-// @ts-ignore
 import { toast } from "sonner";
 import { Projector } from "~/components/svg/projector";
 

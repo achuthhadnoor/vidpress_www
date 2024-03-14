@@ -1,3 +1,4 @@
+import React from "react";
 
 type VideoDisplayProps = {
   videoUrl: string;
@@ -6,7 +7,7 @@ type VideoDisplayProps = {
 export const VideoDisplay = ({ videoUrl }: VideoDisplayProps) => (
   <video
     id="compress-video-player"
-    className="h-full w-full rounded px-4 "
+    className="flex-1 h-full w-full px-4 overflow-auto"
     controls
   >
     <source src={videoUrl} type="video/mp4" />

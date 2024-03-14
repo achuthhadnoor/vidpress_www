@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply text-neutral-100 bg-[#212124] border-[#28282f] h-screen;
+  @apply text-neutral-100 bg-[#363638] border-[#28282f] h-screen;
   scroll-behavior: smooth;
 }
 

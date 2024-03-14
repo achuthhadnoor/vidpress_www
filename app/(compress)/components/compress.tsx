@@ -134,7 +134,7 @@ const CompressVideo = () => {
     <div className="flex flex-col md:flex-row h-screen">
       {videoFile ? (<>
         <div
-          className="flex flex-col gap-4 justify-between flex-2 col-span-5 md:h-full w-full"
+          className="flex flex-col gap-4 justify-between flex-2 col-span-5 md:h-full w-full h-screen"
         >
           <VideoDisplay videoUrl={URL.createObjectURL(videoFile.file)} />
           {videoFile && (

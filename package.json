@@ -1,27 +1,35 @@
 {
-  "name": "vidpress",
-  "version": "0.0.1",
+  "name": "video-compression",
+  "version": "0.1.0",
   "private": true,
-  "description": "Video compression ",
+  "description": "Compress Videos for Free. Forever. Say goodbye to bulky files! Crush video sizes by 90% with no quality loss, even offline. And the best part? It's free!",
   "author": {
-    "name": "Achuth Hadnoor",
-    "email": "hey@achuth.dev",
-    "website": "https://achuth.dev",
-    "twitter": "https://twitter.com/achuth_hadnoor",
-    "linkedin": "https://www.linkedin.com/in/achuth-hadnoor/"
+    "name": "Pranav",
+    "email": "hi@pranavp.xyz",
+    "website": "https://pranavp.xyz",
+    "twitter": "https://twitter.com/thatspranav",
+    "linkedin": "https://www.linkedin.com/in/pranavp10/"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/achuthhadnoor/vidpress"
+    "url": "https://github.com/pranavp10/videocompress"
   },
-  "keywords": [],
+  "keywords": [
+    "Free Video Compressor",
+    "Online Video Converter",
+    "Video Compression Tool",
+    "Image Compression Tool",
+    "Compress Video Online",
+    "Convert Video Online",
+    "High-Quality Video Compression",
+    "Shrink Video File Size"
+  ],
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "tauri": "tauri "
+    "lint": "next lint"
   },
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.10",
