@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply text-neutral-100 bg-[#363638] border-[#28282f] h-screen;
+  scroll-behavior: smooth;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-neutral-900;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply absolute rounded bg-neutral-400;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply rounded bg-indigo-700;
+}
+::-webkit-search-cancel-button {
+  @apply bg-orange-400;
+}
