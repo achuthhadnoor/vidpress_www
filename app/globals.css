@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply text-neutral-100 bg-[#363638] border-[#28282f] h-screen;
+  @apply text-neutral-100 bg-[#202022] border-[#28282f] h-screen;
   scroll-behavior: smooth;
 }
 
@@ -24,7 +24,7 @@ html {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  @apply rounded bg-indigo-700;
+  @apply rounded bg-yellow-700;
 }
 ::-webkit-search-cancel-button {
   @apply bg-orange-400;

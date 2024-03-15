@@ -52,16 +52,16 @@ export const CustomDropZone = ({
       {({ getRootProps, getInputProps }: any) => (
         <div
           {...getRootProps()}
-          className={`${isHover ? "border-black bg-indigo-900 text-neutral-50" : "border-default-gray"
+          className={`${isHover ? "border-black bg-yellow-900 text-neutral-50" : "border-default-gray"
             } flex justify-center items-center flex-col cursor-pointer w-full py-6 ${disabled ? "cursor-not-allowed" : ""
             }`}
         >
           <input {...getInputProps()} />
-          <span className="p-5 bg-indigo-900/10 rounded-full">
+          <span className="p-5 bg-yellow-200/10 rounded-full">
             <Projector />
           </span>
           <h3 className=" text-center mt-5 text-md">
-            <span className="font-bold">Choose a video</span> or upload a files
+            <span className="font-bold text-yellow-400">Choose a video</span> <span>or upload a files</span>
           </h3>
         </div>
       )}

@@ -59,7 +59,7 @@ const CompressVideo = () => {
 
   const handleUpload = (file: File) => {
     setVideoFile({
-      fileName: file.name,
+      fileName: `${file.name}_vidpress`,
       fileSize: file.size,
       from: file.name.slice(((file.name.lastIndexOf(".") - 1) >>> 0) + 2),
       fileType: file.type,
@@ -80,7 +80,7 @@ const CompressVideo = () => {
       ffmpegRef.current.on("log", ({ message }) => {
         console.log(message);
       });
-      const { url, output, outputBlob } = await convertFile(
+      const { url, output, outputBlob, data } = await convertFile(
         ffmpegRef.current,
         videoFile,
         videoSettings
@@ -90,6 +90,7 @@ const CompressVideo = () => {
         url,
         output,
         outputBlob,
+        data
       });
       setTime((oldTime) => ({ ...oldTime, startTime: undefined }));
       setStatus("converted");
@@ -153,7 +154,7 @@ const CompressVideo = () => {
             exit={{ scale: 0.8, opacity: 0 }}
             key="size"
             transition={{ type: "tween" }}
-            className=" flex rounded-3xl h-full relative w-1/2"
+            className=" flex rounded-3xl h-full relative md:w-1/2"
           >
             <div className="flex flex-1 flex-col gap-2 w-full h-screen overflow-auto pr-4">
               {videoFile && (
@@ -183,7 +184,7 @@ const CompressVideo = () => {
                   <button
                     onClick={compress}
                     type="button"
-                    className=" bg-indigo-700 rounded-lg text-white/90 px-3.5 py-2.5 relative text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-500 focus:ring-zinc-950 w-full plausible-event-name=Compressed"
+                    className=" bg-yellow-700 rounded-lg text-white/90 px-3.5 py-2.5 relative text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-500 focus:ring-zinc-950 w-full plausible-event-name=Compressed"
                   >
                     Compress
                   </button>
