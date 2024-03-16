@@ -61,8 +61,8 @@
     },
     "windows": [
       {
-        "alwaysOnTop": true,
         "fullscreen": false,
+        "maximizable": false,
         "height": 600,
         "width": 900,
         "resizable": true,
