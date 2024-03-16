@@ -59,7 +59,7 @@ const CompressVideo = () => {
 
   const handleUpload = (file: File) => {
     setVideoFile({
-      fileName: `${file.name}_vidpress`,
+      fileName: file.name,
       fileSize: file.size,
       from: file.name.slice(((file.name.lastIndexOf(".") - 1) >>> 0) + 2),
       fileType: file.type,
@@ -118,21 +118,22 @@ const CompressVideo = () => {
     });
   };
 
-  const loadWithToast = () => {
-    toast.promise(load, {
-      loading: "Downloading necessary packages from FFmpeg for offline use.",
-      success: () => {
-        return "All necessary file downloaded";
-      },
-      error: "Error loading FFmpeg packages",
-    });
+  const loadWithToast = async () => {
+    await load()
+    // toast.promise(load, {
+    //   loading: "Downloading necessary packages for offline use.",
+    //   success: () => {
+    //     return "All necessary file downloaded";
+    //   },
+    //   error: "Error loading FFmpeg packages",
+    // });
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => loadWithToast(), []);
+  useEffect(() => { loadWithToast() }, []);
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="flex flex-col md:flex-row h-screen ">
       {videoFile ? (<>
         <div
           className="flex flex-col gap-4 justify-between flex-2 col-span-5 md:h-full w-full h-screen"
@@ -154,7 +155,7 @@ const CompressVideo = () => {
             exit={{ scale: 0.8, opacity: 0 }}
             key="size"
             transition={{ type: "tween" }}
-            className=" flex rounded-3xl h-full relative md:w-1/2"
+            className=" flex rounded-3xl h-full relative md:w-1/2 bg-neutral-900"
           >
             <div className="flex flex-1 flex-col gap-2 w-full h-screen overflow-auto pr-4">
               {videoFile && (

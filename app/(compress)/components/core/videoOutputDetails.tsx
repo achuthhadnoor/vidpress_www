@@ -29,15 +29,14 @@ export const VideoOutputDetails = ({
   const download = async () => {
     if (!videoFile?.url) return;
     if (videoFile.outputBlob && window.__TAURI_IPC__) {
-      const filePath = await save({ defaultPath: videoFile.fileName });
-      if (filePath && videoFile.outputBlob) {
+      const filePath = await save({ defaultPath: `${videoFile.fileName}.${videoFile.fileType}` });
+      if (filePath && videoFile.data) {
         try {
           const binaryData = await videoFile.outputBlob.slice(0, videoFile.outputBlob.size).arrayBuffer();
           await writeBinaryFile(filePath, binaryData);
-          alert("wrote to disk")
-
+          console.log("wrote to disk")
         } catch (error) {
-          alert(error)
+          console.log(error)
         }
       }
     } else {

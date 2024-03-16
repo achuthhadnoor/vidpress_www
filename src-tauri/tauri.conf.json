@@ -61,6 +61,7 @@
     },
     "windows": [
       {
+        "alwaysOnTop": true,
         "fullscreen": false,
         "height": 600,
         "width": 900,

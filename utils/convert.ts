@@ -29,7 +29,12 @@ export default async function convertFile(
   videoSettings: VideoInputSettings
 ): Promise<any> {
   const { file, fileName, fileType } = actionFile;
-  const output = removeFileExtension(fileName) + "." + videoSettings.videoType;
+  const output =
+    removeFileExtension(fileName) +
+    "_" +
+    Date.now() +
+    "." +
+    videoSettings.videoType;
   ffmpeg.writeFile(fileName, await fetchFile(file));
   const command = videoSettings.twitterCompressionCommand
     ? twitterCompressionCommand(fileName, output)
