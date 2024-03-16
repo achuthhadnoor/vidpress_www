@@ -17,7 +17,7 @@ const VideoSlider = React.forwardRef<
     {...props}
   >
     <SliderPrimitive.Track className="relative h-9 w-full grow overflow-hidden rounded-md">
-      <SliderPrimitive.Range className="absolute h-full bg-indigo-300/10" />
+      <SliderPrimitive.Range className="absolute h-full bg-yellow-300/10" />
       <svg
         viewBox="0 0 20000 2000"
         xmlns="http://www.w3.org/2000/svg"
@@ -35,9 +35,9 @@ const VideoSlider = React.forwardRef<
         />
       </svg>
     </SliderPrimitive.Track>
-    <SliderPrimitive.Thumb className="block h-9 w-[5px] border border-transparent rounded-l-2xl bg-indigo-600 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 cursor-pointer" />
+    <SliderPrimitive.Thumb className="block h-9 w-[5px] border border-transparent rounded-l-2xl bg-yellow-600 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 cursor-pointer" />
 
-    <SliderPrimitive.Thumb className="block h-9 w-[5px] border border-transparent rounded-r-2xl bg-indigo-600 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 cursor-pointer" />
+    <SliderPrimitive.Thumb className="block h-9 w-[5px] border border-transparent rounded-r-2xl bg-yellow-600 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 cursor-pointer" />
   </SliderPrimitive.Root>
 ));
 VideoSlider.displayName = SliderPrimitive.Root.displayName;

@@ -1,4 +1,3 @@
-import { BadgeCheck } from "lucide-react";
 import { FileActions } from "~/types";
 import {
   bytesToSize,
@@ -7,6 +6,11 @@ import {
 } from "~/utils/bytesToSize";
 import { formatTime } from "~/utils/convert";
 import { motion } from "framer-motion";
+import { save } from '@tauri-apps/api/dialog'
+import { writeBinaryFile } from '@tauri-apps/api/fs';
+declare global {
+  interface Window { __TAURI_IPC__: any; }
+}
 type VideoOutputDetailsProps = {
   videoFile: FileActions;
   timeTaken?: number;
@@ -22,16 +26,29 @@ export const VideoOutputDetails = ({
     videoFile.outputBlob
   );
 
-  const download = () => {
+  const download = async () => {
     if (!videoFile?.url) return;
-    const a = document.createElement("a");
-    a.style.display = "none";
-    a.href = videoFile.url;
-    a.download = videoFile.output;
-    document.body.appendChild(a);
-    a.click();
-    URL.revokeObjectURL(videoFile.url);
-    document.body.removeChild(a);
+    if (videoFile.outputBlob && window.__TAURI_IPC__) {
+      const filePath = await save({ defaultPath: `${videoFile.fileName}.${videoFile.fileType}` });
+      if (filePath && videoFile.data) {
+        try {
+          const binaryData = await videoFile.outputBlob.slice(0, videoFile.outputBlob.size).arrayBuffer();
+          await writeBinaryFile(filePath, binaryData);
+          console.log("wrote to disk")
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    } else {
+      const a = document.createElement("a");
+      a.style.display = "none";
+      a.href = videoFile.url;
+      a.download = videoFile.output;
+      document.body.appendChild(a);
+      a.click();
+      URL.revokeObjectURL(videoFile.url);
+      document.body.removeChild(a);
+    }
   };
 
   return (
@@ -52,12 +69,13 @@ export const VideoOutputDetails = ({
           <button
             onClick={download}
             type="button"
-            className="bg-indigo-600 rounded-lg text-white/90 px-2.5 py-1.5 relative text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-500 focus:ring-zinc-950 "
+            className="bg-yellow-600 rounded-lg text-white/90 px-2.5 py-1.5 relative text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-500 focus:ring-zinc-950 "
           >
             Download
           </button>
         </div>
-        <hr className="h-px mb-2 bg-gray-200 border-0 dark:bg-gray-700" />
+        <hr className="h-px my-2 border-0 bg-gray-700" />
+
         <div className="flex justify-between items-center mb-2 pb-2">
           <p className="font-semibold">New file size</p>
           <p className="font-semibold">{outputFileSize}</p>
@@ -79,6 +97,8 @@ export const VideoOutputDetails = ({
           <p>{timeTaken ? formatTime(timeTaken / 1000) : "-"}</p>
         </div>
       </div>
+      <hr className="h-px my-2 border-0 bg-gray-700" />
     </motion.div>
+
   );
 };

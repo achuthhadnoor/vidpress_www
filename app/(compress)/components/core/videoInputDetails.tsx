@@ -27,7 +27,7 @@ export const VideoInputDetails = ({
         <button
           onClick={onClear}
           type="button"
-          className="bg-indigo-600 to-zinc-950 rounded-full p-2 text-white/90 px-2.5 py-1.5 relative text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-500 focus:ring-zinc-950"
+          className="bg-yellow-600 to-zinc-950 rounded-full p-2 text-white/90 px-2.5 py-1.5 relative text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-500 focus:ring-zinc-950"
         >
           Change
         </button>
@@ -37,7 +37,7 @@ export const VideoInputDetails = ({
         <p>File size</p>
         <p>{bytesToSize(videoFile.fileSize)}</p>
       </div>
-      <hr className="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
+      <hr className="h-px my-2 border-0 bg-gray-700" />
     </div>
   </motion.div>
 );
