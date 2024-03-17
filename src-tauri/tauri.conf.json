@@ -4,7 +4,8 @@
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev",
     "devPath": "http://localhost:3000",
-    "distDir": "../out"
+    "distDir": "../out",
+    "withGlobalTauri": true
   },
   "package": {
     "productName": "vidpress",
@@ -57,7 +58,12 @@
       "csp": null
     },
     "updater": {
-      "active": false
+      "active": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IHJzaWduIGVuY3J5cHRlZCBzZWNyZXQga2V5ClJXUlRZMEl5RG1ZYmd3Um1Hakl0Y080NGt2QlRlY29kdWZQRXNvVE5RMUFvYWRIU002Y0FBQkFBQUFBQUFBQUFBQUlBQUFBQWZJYmRkZlBEM3EvSkh5UkdZL0dNblNKUXNoWDEwd3Rja1lZeUdHV1dpbUwrdlRFYVpZQ1ZYRlFLRWlldm4waWpTdUpjOVhJMWRLbkhETGRqQnY1alYzdkRYKzNrUzdpMkErSFVwOVJWOFVTRTFMTTRnUzIxUEFIdlJjTmZNSUk3OWxidU1PdGVTNG89Cg==",
+      "dialog": true,
+      "endpoints": [
+        "https://achuth.dev/release/vidpress/{{target}}/{{current_version"
+      ]
     },
     "windows": [
       {
