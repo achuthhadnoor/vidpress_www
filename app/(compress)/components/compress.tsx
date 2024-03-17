@@ -122,7 +122,7 @@ const CompressVideo = () => {
     toast.promise(load, {
       // loading: "",
       success: () => {
-        return "Now this works offline";
+        return "Now app works offline";
       },
       error: "Error loading packages",
     });

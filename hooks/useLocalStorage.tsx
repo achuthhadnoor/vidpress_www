@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 const useLocalStorage = () => {
     const [user, setUser] = useState<string | null>(null);
     const updateUser = (newUser: any) => {
-        localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('user', JSON.stringify(newUser))
         setUser(newUser);
     }
     useEffect(() => {

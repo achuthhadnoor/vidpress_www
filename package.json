@@ -2,7 +2,7 @@
   "name": "vidpress",
   "version": "0.1.0",
   "private": true,
-  "description": "Video compression app for mac",
+  "description": "A small Video compression app for mac",
   "author": {
     "name": "Achuth Hadnoor",
     "email": "hey@achuth.dev",

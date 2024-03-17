@@ -12,12 +12,11 @@ const Page = () => {
   const [email, setEmail] = useState<string | null>(null);
   const [license, setLicense] = useState<string | null>(null);
   useEffect(() => {
-
-
-    return () => {
-
+    // call the api and prepare the user to update in localStorage
+    if (license?.length === 19 && email) {
+      updateUser({ email, license })
     }
-  }, [])
+  }, [license, email])
 
   return (
     <>

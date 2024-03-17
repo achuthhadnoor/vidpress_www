@@ -61,7 +61,7 @@ export const CustomDropZone = ({
             <Projector />
           </span>
           <h3 className=" text-center mt-5 text-md">
-            <span className="font-bold text-yellow-400">Choose a video</span> <span>or upload a files</span>
+            <span className="font-bold text-yellow-400">Drop a video</span> <span>or upload from device </span>
           </h3>
         </div>
       )}

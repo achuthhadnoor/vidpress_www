@@ -1,11 +1,11 @@
 [package]
 name = "vidpress"
 version = "0.1.0"
-description = "A small video compression app "
+description = "A tiny video compression app for mac, windows and linux"
 authors = ["you"]
 license = ""
 repository = ""
-default-run = "app"
+default-run = "vidpress"
 edition = "2021"
 rust-version = "1.60"
 
