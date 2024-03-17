@@ -1,6 +1,6 @@
 'use client'
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useLocalStorage from "~/hooks/useLocalStorage";
 const CompressVideo = dynamic(() => import("./components/compress"), {
   ssr: false,
@@ -11,11 +11,18 @@ const Page = () => {
   const { user, updateUser } = useLocalStorage();
   const [email, setEmail] = useState<string | null>(null);
   const [license, setLicense] = useState<string | null>(null);
+  useEffect(() => {
+
+
+    return () => {
+
+    }
+  }, [])
 
   return (
     <>
       {user ? <CompressVideo /> : <div className="absolute h-screen w-full flex justify-center items-center align-middle">
-        <div className="max-w-md w-full text-center gap-2 flex flex-col">
+        <div className="max-w-md w-full text-center gap-2 flex flex-col p-2 ">
           <h2 className="text-2xl font-semibold p-2 text-yellow-600">Activate License key</h2>
           <input type="email" autoComplete="false" className="outline-none bg-neutral-800 text-center rounded p-2" placeholder="activate@email.now" required onChange={(e) => {
             setEmail(e.target.value)
