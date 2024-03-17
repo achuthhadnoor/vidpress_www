@@ -8,6 +8,7 @@ import { formatTime } from "~/utils/convert";
 import { motion } from "framer-motion";
 import { save } from '@tauri-apps/api/dialog'
 import { writeBinaryFile } from '@tauri-apps/api/fs';
+import { toast } from "sonner";
 declare global {
   interface Window { __TAURI_IPC__: any; }
 }
@@ -29,12 +30,12 @@ export const VideoOutputDetails = ({
   const download = async () => {
     if (!videoFile?.url) return;
     if (videoFile.outputBlob && window.__TAURI_IPC__) {
-      const filePath = await save({ defaultPath: `${videoFile.fileName}.${videoFile.fileType}` });
+      const filePath = await save({ defaultPath: videoFile.output });
       if (filePath && videoFile.data) {
         try {
           const binaryData = await videoFile.outputBlob.slice(0, videoFile.outputBlob.size).arrayBuffer();
           await writeBinaryFile(filePath, binaryData);
-          console.log("wrote to disk")
+          toast.info("wrote to disk")
         } catch (error) {
           console.log(error)
         }

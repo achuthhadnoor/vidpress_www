@@ -1,52 +1,37 @@
-import { Metadata } from "next";
+'use client'
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import useLocalStorage from "~/hooks/useLocalStorage";
 const CompressVideo = dynamic(() => import("./components/compress"), {
   ssr: false,
 });
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "/video",
-    languages: {
-      "en-US": "/en-US",
-    },
-  },
-  title:
-    "Compress & Convert Videos and Image Like a Pro - Free, High-Quality Online Tool",
-  description:
-    "Say goodbye to bulky video files! Compress and convert videos effortlessly with our free online tool. Enjoy high-quality results without sacrificing clarity, perfect for sharing, uploading, or editing. Convert like a pro, for free!",
-  keywords: [
-    "Free Video Compressor",
-    "Online Video Converter",
-    "Video Compression Tool",
-    "Image Compression Tool",
-    "Compress Video Online",
-    "Convert Video Online",
-    "High-Quality Video Compression",
-    "Shrink Video File Size",
-  ],
-  robots: "index, follow",
-  openGraph: {
-    title:
-      "Compress & Convert Videos Like a Pro - Free, High-Quality Online Tool",
-    description:
-      "Say goodbye to bulky video files! Compress and convert videos effortlessly with our free online tool. Enjoy high-quality results without sacrificing clarity, perfect for sharing, uploading, or editing. Convert like a pro, for free!",
-    url: `${process.env.NEXT_PUBLIC_URL}/video`,
-    type: "website",
-    images: "/og-image.png",
-    siteName: "Video Compression Hub",
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@ThatsPranav",
-    creator: "@ThatsPranav",
-  },
-};
-
 const Page = () => {
+  // verify license 
+  const { user, updateUser } = useLocalStorage();
+  const [email, setEmail] = useState<string | null>(null);
+  const [license, setLicense] = useState<string | null>(null);
+  useEffect(() => {
+    // call the api and prepare the user to update in localStorage
+    if (license?.length === 19 && email) {
+      updateUser({ email, license })
+    }
+  }, [license, email])
+
   return (
     <>
-      <CompressVideo />
+      {user ? <CompressVideo /> : <div className="absolute h-screen w-full flex justify-center items-center align-middle">
+        <div className="max-w-md w-full text-center gap-2 flex flex-col p-2 ">
+          <h2 className="text-2xl font-semibold p-2 text-yellow-600">Activate License key</h2>
+          <input type="email" autoComplete="false" className="outline-none bg-neutral-800 text-center rounded p-2" placeholder="activate@email.now" required onChange={(e) => {
+            setEmail(e.target.value)
+          }} />
+          <input type="text" autoComplete="false" className="outline-none bg-neutral-800 text-center rounded p-2" placeholder="xxxx-xxxx-xxxx-xxxx" required onChange={(e) => {
+            setLicense(e.target.value)
+          }} />
+          <input type="submit" className="bg-yellow-800 rounded p-2 disabled:bg-neutral-700 disabled:cursor-not-allowed" disabled={(email && license) ? false : true} />
+        </div>
+      </div>}
     </>
   );
 };

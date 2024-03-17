@@ -119,14 +119,13 @@ const CompressVideo = () => {
   };
 
   const loadWithToast = async () => {
-    await load()
-    // toast.promise(load, {
-    //   loading: "Downloading necessary packages for offline use.",
-    //   success: () => {
-    //     return "All necessary file downloaded";
-    //   },
-    //   error: "Error loading FFmpeg packages",
-    // });
+    toast.promise(load, {
+      // loading: "",
+      success: () => {
+        return "Now app works offline";
+      },
+      error: "Error loading packages",
+    });
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -155,7 +154,7 @@ const CompressVideo = () => {
             exit={{ scale: 0.8, opacity: 0 }}
             key="size"
             transition={{ type: "tween" }}
-            className=" flex rounded-3xl h-full relative md:w-1/2 bg-neutral-900"
+            className=" flex rounded-3xl h-full relative md:w-1/2 "
           >
             <div className="flex flex-1 flex-col gap-2 w-full h-screen overflow-auto pr-4">
               {videoFile && (
