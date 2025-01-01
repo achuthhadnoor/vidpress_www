@@ -11,8 +11,8 @@ let window: BrowserWindow | null = null,
 const createBrowserWindow = () => {
   close();
   window = new BrowserWindow({
-    height: 570,
-    width: 400,
+    height: 600,
+    width: 1024,
     fullscreen: false,
     resizable: false,
     frame: false,

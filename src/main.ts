@@ -2,6 +2,7 @@ import { app, BrowserWindow } from "electron";
 import "./windows/load";
 import started from "electron-squirrel-startup";
 import { windowManager } from "./windows/windowManager";
+import { createTray } from "./utils/tray";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -12,7 +13,8 @@ if (started) {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
-  windowManager.main.open();
+  // windowManager.main.open();
+  createTray();
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
