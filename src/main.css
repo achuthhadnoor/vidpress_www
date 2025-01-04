@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply relative h-full w-full;
+  @apply relative h-full w-full text-neutral-950 dark:text-neutral-100;
 }
 
 .drag {

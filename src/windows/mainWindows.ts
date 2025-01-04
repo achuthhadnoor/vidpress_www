@@ -4,6 +4,7 @@ import { windowManager } from "./windowManager";
 import isDev from "electron-is-dev";
 import log from "../utils/logger";
 import { join } from "path";
+import { exec } from "child_process";
 
 let window: BrowserWindow | null = null,
   isOpen = false;
@@ -30,10 +31,12 @@ const createBrowserWindow = () => {
     visualEffectState: "active",
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: true,
       allowRunningInsecureContent: true,
       preload: join(__dirname, "preload.js"),
     },
   });
+
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     window.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   } else {
@@ -52,6 +55,30 @@ const createBrowserWindow = () => {
       width = screen.getPrimaryDisplay().workAreaSize.width;
       window?.setSize(width, height);
     }
+  });
+
+  ipcMain.on("compress", (_e, command) => {
+    console.log("====================================");
+    log.info(command);
+    console.log("====================================");
+    // execute ffmpeg command
+    const ffmpegProcess = exec(`ffmpeg ${command}`);
+
+    ffmpegProcess.stdout?.on("data", (data) => {
+      log.info(`stdout: ${data}`);
+    });
+
+    ffmpegProcess.stderr?.on("data", (data) => {
+      log.error(`stderr: ${data}`);
+    });
+
+    ffmpegProcess.on("close", (code) => {
+      log.info(`child process exited with code ${code}`);
+    });
+
+    ffmpegProcess.on("error", (error) => {
+      log.error(`error: ${error.message}`);
+    });
   });
 };
 
