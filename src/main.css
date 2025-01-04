@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  @apply relative h-full w-full;
+}
+
 .drag {
   -webkit-app-region: drag;
+}
+
+::selection {
+  @apply dark:bg-indigo-800/70 bg-indigo-300;
 }
